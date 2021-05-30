@@ -1,0 +1,219 @@
+<div class="nav">
+   
+<table>
+    <tr class="row">
+        <td class="col"><h3>Login As</h3></td>
+        <td class="col"><h3>Login As</h3></td>
+        <td class="col"><h3>Login As</h3></td>
+        <td class="col"><h3>Login As</h3></td>
+    </tr>
+    <tr class="row">
+        <td class="col">
+            <img class="loginlogo" src="../../assets/images/patient.jpg">
+        </td>
+        <td class="col">
+            <img class="loginlogo" src="../../assets/images/doctor.png">
+        </td>
+        <td class="col">
+            <img class="loginlogo" src="../../assets/images/O2Suppliers.jpg">
+        </td>
+        <td class="col">
+            <img class="loginlogo" src="../../assets/images/admin.png">
+        </td>
+    </tr>
+    <tr class="row">
+        <td class="col">
+           <button (click)="login('user')">Patient</button>
+        </td>
+        <td class="col">
+            <button (click)="login('doctor')">Doctor</button>
+        </td>
+        <td  class="col">
+            <button (click)="login('suppliers')">O2 Suppliers</button>
+        </td>
+        <td class="col">
+            <button (click)="login('admin')">Admin</button>
+        </td>
+    </tr>
+</table>
+</div>
+<div class="loginForm">
+    <div class="loginForm-row">
+    <div class="loginForm-col1"></div>
+    <div id="loginForm">
+        
+        <app-login></app-login>
+       
+   </div>
+   <div  id="doctorForm">
+        
+   <app-doctorlogin></app-doctorlogin>
+   
+</div>
+<div  id="supplierForm">
+        
+    <app-supplierlogin></app-supplierlogin>
+    
+ </div>
+    <div class="loginForm-col3"></div>
+</div>
+</div>
+<br/>
+<div class="slideshowcontainer">
+    <div class="slideshowitem1">
+       
+    </div>
+    <div class="slideshowitem2">
+        <app-slideshow></app-slideshow>
+    </div>
+    <div class="slideshowitem3">
+        
+    </div>
+</div> 
+<br/>
+<div class="symptoms">
+    <div class="symptoms-row">
+    <div id="commonsymptoms" class="symptoms-col1">
+        <h5>Most Common Symptoms</h5>
+        <ul>
+            <li>fever</li>
+            <li>dry cough</li>
+            <li> tiredness</li>
+        </ul>
+    </div>
+    <div id="lesscommonsymptoms" class="symptoms-col2">
+        <h5>Less Common Symptoms</h5>
+        <ul>
+            <li>aches and pains</li>
+            <li>sore throat</li>
+            <li>diarrhoea</li>
+            <li>conjunctivitis</li>
+            <li>headache</li>
+            <li>loss of taste or smell</li>
+            <li>a rash on skin, or discolouration of fingers or toes</li>
+        </ul>
+    </div>
+    <div id="serioussymptoms" class="symptoms-col3">
+        <h5>Serious Symptoms</h5>
+        <ul>
+            <li>difficulty breathing or shortness of breath</li>
+            <li>chest pain or pressure</li>
+            <li>loss of speech or movement</li>
+        </ul>
+    </div>
+ </div>
+ <div class="symptomsadvice">
+     <p>
+        Seek immediate medical attention if you have serious symptoms. 
+        Always call before visiting your doctor or health facility. <br/>People
+        with mild symptoms who are otherwise healthy should manage their
+        symptoms at home. On average it takes <br/> 5–6 days from when someone  
+        is infected with the virus for symptoms to show, however it can
+        take up to 14 days.
+     </p>
+ </div>>
+</div>
+<div class="about">
+   <div>
+
+<img class="aboutimage" id="aboutimage" src="../../assets/images/aboutimage.jpg" alt="">
+   </div>
+   <div>
+       <br/>
+       <br/>
+       <br/>
+       <br/>
+       <br/>
+    <h3 id="aboutheading">About Us:</h3>
+    <p id="aboutpara">
+        The overwhelming crisis in the country has not only affected the mental health of people who have directly contracted COVID-19. Some experts are convinced this wave has triggered a mental health epidemic of its own.
+        In this covid-19 crisis we strive together to save your life by protecting your breath.
+    </p>
+   </div>
+</div>
+<div class="vision">
+    <div class="visionrow">
+       
+       <div class="visioncol-1">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h3 id="visionheading">Vision:</h3>
+        <p id="visionpara">COVID-19 second wave has devastated India by a rising wave of caases. Many
+            people stricken with coronavirus are dying while they wait. Hospitals
+            are struggling to accommodate breathless patients. It's a Pure Battle for breath.
+            Our vision is to save the lives.
+        </p>
+       </div>
+       <div class="visioncol-2"></div>
+       <img id="visionimage" src="../../assets/images/oxygen200-scaled.jpg">
+    </div>
+</div>
+<div class="mission">
+<div class=mission-row>
+    <div class="mission-col1">
+        <br/>
+        
+        <img id="missionimage" src="../../assets/images/Oxygen_.jpg">
+    </div>
+    <div class="mission-col2">
+        <br/>
+        <br/>
+        <br/>
+        <h3 id="missionheading">Mission :</h3>
+        <p id="missionpara">The Oxygen crisis became inadequate because too little is too late. 
+            Not all deaths due to Covid-19 are preventable.
+             But deaths due to lack of medical Emergency of O2 
+             at accurate times are. Solving India’s oxygen crisis should be the topmost priority of the government.
+              This is the only essential service that is needed at present.
+               Our mission is to reach and supply O2 
+            on  emergency for Home Isolated covid affected patients.
+             Let’s India breath again!</p>
+    </div>
+</div>
+</div>  
+<br>
+<br>
+
+<div class="footer">
+    <div> <h6>Important Links</h6>
+        <br>
+        </div>
+   <div class="footer-row">
+    <div class="footer-col">
+        <a href="https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data">
+            worldwide corona statistics
+        </a>
+        <br>
+        
+        <a href="https://www.bbc.com/news/health-51665497"> covaid vaccine importance </a>
+        <br>
+        <a href="https://www.bbc.com/news/uk-51506729"> Rules for social distancing</a>
+        <br>
+        <a href="https://www.bbc.com/news/health-51048366">
+            pre-covid precautions
+        </a>
+        <br>
+    </div>
+    <div class="footer-col">
+    <a href="https://pharmeasy.in/blog/6-must-dos-post-covid-19-recovery/">
+        post-covid precautions
+    </a>
+    <br>
+    <a href="https://www.phoebehealth.com/patients-and-visitors/coronavirus/home-self-isolation-tips">
+        home isolation tips
+    </a>
+    <br>
+    <a href="https://www.mysmartprice.com/gear/hospital-bed-availability-online-covid/">
+        hospital’s bed vacancy updates
+    </a>
+    <br>
+    <a href="https://www.bbc.com/news/uk-56841381">
+        a war for breath in India 
+    </a>
+    <br>
+    </div>
+    </div>
+</div>

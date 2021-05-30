@@ -1,0 +1,135 @@
+<!-- 
+    My account.
+    can view assigned orders.
+    accpect/cancel order.
+    forward status to patient for delivery.
+ -->
+
+ 
+ <div class="nav-menu">
+    <a class="success-link" (click)="waitingApplications()">Applications</a>
+    <a class="success-link" (click)="myAccount()">My Details</a>
+    <a class="danger-link" (click)="logout()">Log Out</a>
+   
+  </div>
+
+ <div class="dashboard">
+    
+   <div *ngIf="checkStatus"  class="checkStatus">
+       <br/>
+       <h3>Welcome {{supplier.firstName}}</h3>
+       <h4 style="text-align: center;">Applications</h4>
+
+       <h5>Waiting For Approval</h5>
+       <table *ngIf="applications!=undefined"class="application">
+           <tr >
+               <th>Applicant</th>
+               <th>Email</th>
+               <th>Patient</th>
+               <th>Address</th>
+               <th>Contact</th>
+               
+               <th>Progress</th>
+               <th>Emergency</th>
+               <th>Approved Doctor</th>
+               <th>Applied on</th>
+               <th>Approved on</th>
+               <th>LastUpdate</th>
+               <th>Delivery Initiated</th>
+               <th>Document</th>
+               <th>Delivery</th>
+           </tr>
+           <tr *ngFor="let a of applications">
+               <td *ngIf="a.status">{{a.applicantName}}</td>
+               <td *ngIf="a.status">{{a.applicantMail}}</td>
+               <td *ngIf="a.status">{{a.patientName}}</td>
+               <td *ngIf="a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
+               
+               <td *ngIf="a.status">{{a.mobile}}</td>
+               
+               <td *ngIf="a.status">{{a.waitingWith}}</td>
+               <td *ngIf="a.status">{{a.emergency}}</td>
+               <td *ngIf="a.status">{{a.approvedBy}}</td>
+               <td *ngIf="a.status">{{a.appliedOn}}</td>
+               <td *ngIf="a.status">{{a.approvedOn}}</td>
+               <td *ngIf="a.status">{{a.lastUpdate}}</td>
+               <td *ngIf="a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
+               
+               <td *ngIf="a.status" (click)="getImage(a.imageId)"><u>document</u></td>
+               <td *ngIf="a.status"><button (click)="approveDelivery(a)" class="btn btn-success">Approve</button></td>
+           </tr>
+           
+       </table>
+         
+   </div>
+  
+   <div *ngIf="myDetails" class="mydetails">
+       <br/>
+       <h3>Welcome {{supplier.firstName}}</h3>
+       <h4 style="text-align: center;">My Details</h4>
+       <table>
+           <tr>
+               <td>
+                   First Name 
+               </td>
+               <td>
+                   {{supplier.firstName}}
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Last Name
+               </td>
+               <td>
+                   {{supplier.lastName}}
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Email 
+               </td>
+               <td>
+                   {{supplier.email}}
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Number
+               </td>
+               <td>
+                   {{supplier.number}}
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Old Password.
+               </td>
+               <td>
+                   <input type="password" [(ngModel)]="oldPassword"><br>
+                   <button  class="btn btn-success" (click)="validate()">Validate</button> <br>
+                   <span *ngIf="passwordValid" style="color: green;">Success &#10003;</span>
+                   
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   New Password.
+               </td>
+               <td>
+                   <input type="password" [(ngModel)]="newpassword">
+                    
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Re-Enter New Password.
+               </td>
+               <td>
+                   <input type="password" [(ngModel)]="newpassword2"><br>
+                   <button class="btn btn-success" (click)="changePassword()">Change</button> 
+               </td>
+           </tr>
+           
+       </table>
+       
+   </div>

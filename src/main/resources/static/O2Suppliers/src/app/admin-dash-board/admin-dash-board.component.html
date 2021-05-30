@@ -1,0 +1,417 @@
+<!-- admin dash board.
+all users:
+list all Patients:
+List all Doctors;
+list all O2Suppliers:
+
+All orders:
+open and close with status:-> applied->doctor->admin->o2suppliers->delivery
+
+can edit and cancel.
+
+Admin can add,edit and block  any user
+
+can change status of order -->
+
+<div class="nav-menu">
+    <a class="success-link" (click)="allApplications()">List Applications</a>
+    <a class="success-link" (click)="allUsers()">List Users</a>
+    <a class="success-link" (click)="allDoctors()">List Doctors</a>
+    <a class="success-link" (click)="allSuppliers()">List Suppliers</a>
+    <a class="success-link" (click)="myAccount()">My Details</a>
+    <a class="danger-link" (click)="logout()">Log Out</a>
+   
+  </div>
+
+
+<div class="dashboard">
+    
+   <div *ngIf="listApplications"  class="checkStatus">
+       <br/>
+       <h3>Welcome {{admin.firstName}}</h3>
+       <h4 style="text-align: center;">Applications</h4>
+
+       
+       <h5>Open Applications</h5>
+       <table class="application">
+           <tr >
+               <th>Applicant</th>
+               <th>Email</th>
+               <th>Patient</th>
+               <th>Address</th>
+               <th>Contact</th>
+               <th>Status</th>
+               <th>Progress</th>
+              
+               <th>Emergency</th>
+               <th>Approved Doctor</th>
+               <th>Applied on</th>
+               <th>Approved on</th>
+               <th>LastUpdate</th>
+               <th>Delivery Initiated</th>
+
+               <th>Document</th>
+               <th>Modify</th>
+           </tr>
+           <tr *ngFor="let a of applications">
+               <td *ngIf="a.status">{{a.applicantName}}</td>
+               <td *ngIf="a.status">{{a.applicantMail}}</td>
+               <td *ngIf="a.status">{{a.patientName}}</td>
+               <td *ngIf="a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
+               
+               <td *ngIf="a.status">{{a.mobile}}</td>
+               <td *ngIf="a.status">{{a.status}}</td>
+               <td *ngIf="a.status">{{a.waitingWith}}</td>
+
+               <td *ngIf="a.status">{{a.emergency}}</td>
+               <td *ngIf="a.status">{{a.approvedBy}}</td>
+               <td *ngIf="a.status">{{a.appliedOn}}</td>
+               <td *ngIf="a.status">{{a.approvedOn}}</td>
+               <td *ngIf="a.status">{{a.lastUpdate}}</td>
+               <td *ngIf="a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
+               
+               <td *ngIf="a.status" (click)="getImage(a.imageId)"><u>document</u></td>
+               <td *ngIf="a.status"><button (click)="cancel(a)" class="btn btn-danger">Close</button></td>
+           </tr>
+           
+       </table>
+           <br/><br/>
+           <h5>Closed Applications</h5>
+       <table class="application">
+           <tr >
+               <th>Applicant</th>
+               <th>Email</th>
+               <th>Patient</th>
+               <th>Address</th>
+               <th>Contact</th>
+               <th>Status</th>
+               <th>Progress</th>
+               
+               <th>Emergency</th>
+               <th>Approved Doctor</th>
+               <th>Applied on</th>
+               <th>Approved on</th>
+               <th>LastUpdate</th>
+               <th>Delivery Initiated</th>
+
+               <th>Document</th>
+               <th>Modify</th>
+           </tr>
+           <tr *ngFor="let a of applications">
+               <td *ngIf="!a.status">{{a.applicantName}}</td>
+               <td *ngIf="!a.status">{{a.applicantMail}}</td>
+               <td *ngIf="!a.status">{{a.patientName}}</td>
+               <td *ngIf="!a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
+               
+               <td *ngIf="!a.status">{{a.mobile}}</td>
+               <td *ngIf="!a.status">{{a.status}}</td>
+               <td *ngIf="!a.status">{{a.waitingWith}}</td>
+
+               <td *ngIf="!a.status">{{a.emergency}}</td>
+               <td *ngIf="!a.status">{{a.approvedBy}}</td>
+               <td *ngIf="!a.status">{{a.appliedOn}}</td>
+               <td *ngIf="!a.status">{{a.approvedOn}}</td>
+               <td *ngIf="!a.status">{{a.lastUpdate}}</td>
+               <td *ngIf="!a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
+
+               <td *ngIf="!a.status" (click)="getImage(a.imageId)"><u>document</u></td>
+               <td *ngIf="!a.status"><button (click)="revoke(a)" class="btn btn-success">Open Again</button></td>
+           </tr>
+           
+       </table>
+   </div>
+   
+   <div *ngIf="listUsers"  class="checkStatus">
+       <br/>
+       <h3>Welcome {{admin.firstName}}</h3>
+       <h4 style="text-align: center;">All Users</h4>
+
+       
+       <h5>Active Users</h5>
+       <table class="application">
+           <tr >
+               <th>firstName</th>
+               <th>lastName</th>
+               <th>email</th>
+               <th>Contact</th>
+               <th>Status</th>
+               <th>Block</th>
+               
+           </tr>
+           <tr *ngFor="let u of users">
+              <td *ngIf="u.status">{{u.firstName}}</td>
+               <td *ngIf="u.status">{{u.lastName}}</td>
+               <td *ngIf="u.status">{{u.email}}</td>
+               <td *ngIf="u.status">{{u.number}}</td>
+               <td *ngIf="u.status">Active</td>
+               <td *ngIf="u.status&&(u.role=='admin')"><button class="btn btn-danger" disabled>Block</button></td>
+               <td *ngIf="u.status&&(u.role!='admin')"><button (click)="blockUser(u)" class="btn btn-danger">Block</button></td>
+            </tr>
+           
+       </table>
+                 
+       <h5>Blocked Users</h5>
+       <table class="application">
+           <tr >
+               <th>firstName</th>
+               <th>lastName</th>
+               <th>email</th>
+               <th>Contact</th>
+               <th>Status</th>
+               <th>Block</th>
+               
+           </tr>
+           <tr *ngFor="let u of users">
+              <td *ngIf="!u.status">{{u.firstName}}</td>
+               <td *ngIf="!u.status">{{u.lastName}}</td>
+               <td *ngIf="!u.status">{{u.email}}</td>
+               <td *ngIf="!u.status">{{u.number}}</td>
+               <td *ngIf="!u.status">In Active</td>
+               <td *ngIf="!u.status"><button (click)="unBlockUser(u)" class="btn btn-success">UnBlock</button></td>
+           </tr>
+           
+       </table>
+ 
+   </div>
+  
+   <div *ngIf="listSuppliers"  class="checkStatus">
+       <br/>
+       <h3>Welcome {{admin.firstName}}</h3>
+       <h4 style="text-align: center;">All Suppliers</h4>
+
+       
+       <h5>Active Suppliers</h5>
+       <table class="application">
+           <tr >
+               <th>firstName</th>
+               <th>lastName</th>
+               <th>email</th>
+               <th>Contact</th>
+               <th>Industry Name</th>
+                <th>City</th>        
+                <th>Status</th>
+                <th>Block</th>       
+           </tr>
+           <tr *ngFor="let s of suppliers">
+
+               <td *ngIf="s.status">{{s.firstName}}</td>
+               <td *ngIf="s.status">{{s.lastName}}</td>
+               <td *ngIf="s.status">{{s.email}}</td>
+               <td *ngIf="s.status">{{s.number}}</td>
+               <td *ngIf="s.status">{{s.industryName}}</td>
+               <td *ngIf="s.status">{{s.city}}</td>
+               <td *ngIf="s.status">Active</td>
+               <td *ngIf="s.status"><button class="btn btn-danger" (click)="blockSupplier(s)">Block</button></td>
+           </tr>
+           
+       </table>
+      
+       
+       <h5>Blocked Suppliers</h5>
+       <table class="application">
+           <tr >
+               <th>firstName</th>
+               <th>lastName</th>
+               <th>email</th>
+               <th>Contact</th>
+               <th>Industry Name</th>
+                <th>City</th>        
+                <th>Status</th>
+                <th>Block</th>       
+           </tr>
+           <tr *ngFor="let s of suppliers">
+
+               <td *ngIf="!s.status">{{s.firstName}}</td>
+               <td *ngIf="!s.status">{{s.lastName}}</td>
+               <td *ngIf="!s.status">{{s.email}}</td>
+               <td *ngIf="!s.status">{{s.number}}</td>
+               <td *ngIf="!s.status">{{s.industryName}}</td>
+               <td *ngIf="!s.status">{{s.city}}</td>
+               <td *ngIf="!s.status">In Active</td>
+               <td *ngIf="!s.status"><button class="btn btn-success" (click)="unBlockSupplier(s)">Un Block</button></td>
+           </tr>
+           
+       </table>
+      
+   </div>
+   
+   <div *ngIf="listDoctors"  class="checkStatus">
+       <br/>
+       <h3>Welcome {{admin.firstName}}</h3>
+       <h4 style="text-align: center;">All Doctors</h4>
+
+       
+       <h5>Active Doctors</h5>
+       <table class="application">
+           <tr >
+               <th>firstName</th>
+               <th>lastName</th>
+               <th>email</th>
+               <th>Contact</th>
+               <th>Hospital Name</th>
+                <th>City</th> 
+                <th>Status</th>
+                <th>Block</th>                  
+           </tr>
+           <tr *ngFor="let d of doctors">
+               
+            <td *ngIf="d.status">{{d.firstName}}</td>
+            <td *ngIf="d.status">{{d.lastName}}</td>
+            <td *ngIf="d.status">{{d.email}}</td>
+            <td *ngIf="d.status">{{d.number}}</td>
+            <td *ngIf="d.status">{{d.industryName}}</td>
+            <td *ngIf="d.status">{{d.city}}</td>
+            <td *ngIf="d.status">Active</td>
+            <td *ngIf="d.status"><button class="btn btn-danger" (click)="blockDoctor(d)">Block</button></td>
+
+           </tr>
+           
+       </table>
+       <h5>Blocked Doctors</h5>
+       <table class="application">
+           <tr >
+               <th>firstName</th>
+               <th>lastName</th>
+               <th>email</th>
+               <th>Contact</th>
+               <th>Hospital Name</th>
+                <th>City</th> 
+                <th>Status</th>
+                <th>Block</th>                  
+           </tr>
+           <tr *ngFor="let d of doctors">
+               
+            <td *ngIf="!d.status">{{d.firstName}}</td>
+            <td *ngIf="!d.status">{{d.lastName}}</td>
+            <td *ngIf="!d.status">{{d.email}}</td>
+            <td *ngIf="!d.status">{{d.number}}</td>
+            <td *ngIf="!d.status">{{d.industryName}}</td>
+            <td *ngIf="!d.status">{{d.city}}</td>
+            <td *ngIf="!d.status">In Active</td>
+            <td *ngIf="!d.status"><button class="btn btn-success" (click)="unBlockDoctor(d)">Un Block</button></td>
+
+           </tr>
+           
+       </table>
+
+   </div>
+   
+   <div *ngIf="myDetails" class="mydetails">
+       <br/>
+       <h3>Welcome {{admin.firstName}}</h3>
+       <h4 style="text-align: center;">My Details</h4>
+       <table>
+           <tr>
+               <td>
+                   First Name 
+               </td>
+               <td>
+                   {{admin.firstName}}
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Last Name
+               </td>
+               <td>
+                   {{admin.lastName}}
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Email 
+               </td>
+               <td>
+                   {{admin.email}}
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Number
+               </td>
+               <td>
+                   {{admin.number}}
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Old Password.
+               </td>
+               <td>
+                   <input type="password" [(ngModel)]="oldPassword"><br>
+                   <button  class="btn btn-success" (click)="validate()">Validate</button> <br>
+                   <span *ngIf="passwordValid" style="color: green;">Success &#10003;</span>
+                   
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   New Password.
+               </td>
+               <td>
+                   <input type="password" [(ngModel)]="newpassword">
+                    
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   Re-Enter New Password.
+               </td>
+               <td>
+                   <input type="password" [(ngModel)]="newpassword2"><br>
+                   <button class="btn btn-success" (click)="changePassword()">Change</button> 
+               </td>
+           </tr>
+           
+       </table>
+       
+   </div>
+
+<!-- <div  class="menu-col4"> 
+      
+      
+         
+          
+    <button class="button-info">Apply</button><br/><br/>
+   <button class="button-info">Check Status</button><br/><br/>
+   <button class="button-info" >My Details</button><br/><br/>
+   <button class="button-danger" (click)="logout()">Log Out</button>
+   <table>
+       <tr>
+           <th> Menu</th>
+       </tr>
+      
+       <tr>
+           <td (click)="allApplications()">
+               <a>All Applications</a>
+           </td>
+       </tr>
+       <tr>
+        <td (click)="allUsers()">
+            <a>All Users</a>
+        </td>
+      </tr>
+      <tr>
+        <td (click)="allDoctors()">
+            <a>All Doctors</a>
+        </td>
+    </tr>
+    <tr>
+        <td (click)="allSuppliers()">
+            <a>All Suppliers</a>
+        </td>
+    </tr>
+       <tr>
+           <td (click)="myAccount()" >
+               <a>My Details</a>
+           </td>
+       </tr>
+       <tr>
+           <td  (click)="logout()"id="logout">
+               <a>Log Out</a>
+           </td>
+       </tr>
+   </table>
+</div>
+
+</div> -->

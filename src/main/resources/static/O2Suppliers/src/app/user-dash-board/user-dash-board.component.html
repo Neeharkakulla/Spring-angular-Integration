@@ -1,0 +1,282 @@
+
+<div class="nav-menu">
+    <a class="success-link" (click)="showForm()">Apply</a>
+    <a class="success-link" (click)="myApplications()"> My Applications</a>
+    <a class="success-link" (click)="myAccount()">My Details</a>
+    <a class="danger-link" (click)="logout()">Log Out</a>
+   
+  </div>
+<div >
+
+    
+    <div *ngIf="application" class="apply"> 
+        <br/>
+        <h3>Welcome {{user.firstName}}</h3>
+         <h2>Application Form</h2>
+        <form [formGroup]="applicationForm" (ngSubmit)="apply()">
+
+
+                <div class="form-group">
+                  <label>applicantName</label>
+                  <input type="text" formControlName="applicantName" class="form-control" readonly />
+                </div>
+
+
+               
+
+                  <div class="form-group">
+                      <label>Applicant Mail</label>
+                      <input type="text" formControlName="applicantMail" class="form-control" readonly />
+                      
+                  </div>
+                  <div class="form-group">
+                    <label>Patient Name</label>
+                    <input type="text" formControlName="patientName" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.patientName.errors }" />
+                    <div *ngIf="submitted && r.patientName.errors" class="invalid-feedback">
+                        <div *ngIf="r.patientName.errors.required">patientName is required</div>
+                        <div *ngIf="r.patientName.errors.minlength">patientName must be at least 6 characters</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label>D.no/Street</label>
+                      <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.address.errors }" />
+                      <div *ngIf="submitted && r.address.errors" class="invalid-feedback">
+                          <div *ngIf="r.address.errors.required">address is required</div>
+                      </div>
+                    </div>
+                   
+    
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.city.errors }" />
+                        <div *ngIf="submitted && r.city.errors" class="invalid-feedback">
+                            <div *ngIf="r.city.errors.required">city is required</div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>District</label>
+                        <input type="text" formControlName="district" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.district.errors }" />
+                        <div *ngIf="submitted && r.district.errors" class="invalid-feedback">
+                            <div *ngIf="r.district.errors.required">district is required</div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>State</label>
+                        <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.state.errors }" />
+                        <div *ngIf="submitted && r.state.errors" class="invalid-feedback">
+                            <div *ngIf="r.state.errors.required">State is required</div>
+                        </div>
+                      </div>
+
+                    <div class="form-group">
+                      <label>Mobile</label>
+                      <input type="text" formControlName="mobile" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.mobile.errors }" />
+                      <div *ngIf="submitted && r.mobile.errors" class="invalid-feedback">
+                          <div *ngIf="r.mobile.errors.required">Mobile Number is required</div>
+                          <div *ngIf="r.mobile.errors.minlength">Mobile Number must contain 10 characters</div>
+                      </div>
+                    </div>
+
+                    
+                <button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+                <br/> <br/>
+
+              
+              </form>
+              <h6>Upload Supporting Document</h6>
+              <input accept=".png,.jpg,.jpeg" type="file" (change)="onFileChanged($event)" required>
+              <span *ngIf="imageUploded" style="color: green;">Uploaded &#10003;</span>
+
+              <span id="imageerror" style="color: red;"></span><br/> <br/>
+              <button class="btn btn-success" (click)="onUpload()" value="upload">upload</button>
+             
+            </div>
+   
+    <div  *ngIf="checkStatus" class="checkStatus">
+        <br/>
+        <h3>Welcome {{user.firstName}}</h3>
+        <h4 style="text-align: center;">My Applications</h4>
+
+        <h5>Open Applications</h5>
+        <table class="application">
+            <tr >
+                <th>Applicant</th>
+                <th>Email</th>
+                <th>Patient</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Status</th>
+                <th>Progress</th>
+                <th>Applied on</th>
+                <th>Approved on</th>
+                <th>LastUpdate</th>
+                <th>Delivery Initiated</th>
+                <th>Document</th>
+                <th>Modify</th>
+            </tr>
+            <tr *ngFor="let a of applications">
+                <td *ngIf="a.status">{{a.applicantName}}</td>
+                <td *ngIf="a.status">{{a.applicantMail}}</td>
+                <td *ngIf="a.status">{{a.patientName}}</td>
+                <td *ngIf="a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
+                
+                <td *ngIf="a.status">{{a.mobile}}</td>
+                <td *ngIf="a.status">{{a.status}}</td>
+                <td *ngIf="a.status">{{a.waitingWith}}</td>
+                <td *ngIf="a.status">{{a.appliedOn}}</td>
+                <td *ngIf="a.status">{{a.approvedOn}}</td>
+                <td *ngIf="a.status">{{a.lastUpdate}}</td>
+                <td *ngIf="a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
+                <td *ngIf="a.status" (click)="getImage(a.imageId)"><u>document</u></td>
+                <td *ngIf="a.status"><button (click)="cancel(a)" class="btn btn-danger">Close</button></td>
+            </tr>
+            
+        </table>
+            <br/><br/>
+            <h5>Closed Applications</h5>
+        <table class="application">
+            <tr >
+                <th>Applicant</th>
+                <th>Email</th>
+                <th>Patient</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Status</th>
+                <th>Progress</th>
+                <th>Applied on</th>
+                <th>Approved on</th>
+ 
+                <th>LastUpdate</th>
+                <th>Delivery Initiated</th>
+                <th>Document</th>
+                <th>Modify</th>
+            </tr>
+            <tr *ngFor="let a of applications">
+                <td *ngIf="!a.status">{{a.applicantName}}</td>
+                <td *ngIf="!a.status">{{a.applicantMail}}</td>
+                <td *ngIf="!a.status">{{a.patientName}}</td>
+                <td *ngIf="!a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
+                
+                <td *ngIf="!a.status">{{a.mobile}}</td>
+                <td *ngIf="!a.status">{{a.status}}</td>
+                <td *ngIf="!a.status">{{a.waitingWith}}</td>
+                <td *ngIf="!a.status">{{a.appliedOn}}</td>
+                <td *ngIf="!a.status">{{a.approvedOn}}</td>
+                <td *ngIf="!a.status">{{a.lastUpdate}}</td>
+                <td *ngIf="!a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
+                <td *ngIf="!a.status" (click)="getImage(a.imageId)"><u>document</u></td>
+                <td *ngIf="!a.status"><button (click)="revoke(a)" class="btn btn-success">Open Again</button></td>
+            </tr>
+            
+        </table>
+    </div>
+   
+    <div *ngIf="myDetails" class="mydetails">
+        <br/>
+        <h3>Welcome {{user.firstName}}</h3>
+        <h4 style="text-align: center;">My Details</h4>
+        <table>
+            <tr>
+                <td>
+                    First Name 
+                </td>
+                <td>
+                    {{user.firstName}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Last Name
+                </td>
+                <td>
+                    {{user.lastName}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Email 
+                </td>
+                <td>
+                    {{user.email}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Number
+                </td>
+                <td>
+                    {{user.number}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Old Password.
+                </td>
+                <td>
+                    <input type="password" [(ngModel)]="oldPassword"><br>
+                    <button  class="btn btn-success" (click)="validate()">Validate</button> <br>
+                    <span *ngIf="passwordValid" style="color: green;">Success &#10003;</span>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    New Password.
+                </td>
+                <td>
+                    <input type="password" [(ngModel)]="newpassword">
+                     
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Re-Enter New Password.
+                </td>
+                <td>
+                    <input type="password" [(ngModel)]="newpassword2"><br>
+                    <button class="btn btn-success" (click)="changePassword()">Change</button> 
+                </td>
+            </tr>
+            
+        </table>
+        
+    </div>
+
+            
+       
+                      
+        <!-- <button class="button-info">Apply</button><br/><br/>
+        <button class="button-info">Check Status</button><br/><br/>
+        <button class="button-info" >My Details</button><br/><br/>
+        <button class="button-danger" (click)="logout()">Log Out</button> 
+        <table>
+            <tr>
+                <th> Menu</th>
+            </tr>
+            <tr>
+                <td (click)="showForm()">
+                    <a >Apply</a>
+                </td>
+            </tr>
+            <tr>
+                <td (click)="myApplications()">
+                    <a>Check Status</a>
+                </td>
+            </tr>
+            <tr>
+                <td (click)="myAccount()" >
+                    <a>My Details</a>
+                </td>
+            </tr>
+            <tr>
+                <td  (click)="logout()"id="logout">
+                    <a>Log Out</a>
+                </td>
+            </tr>
+        </table> -->
+    </div>
+    
+        
+      
+
+

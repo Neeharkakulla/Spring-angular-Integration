@@ -1,0 +1,20 @@
+export class ApplicationForm {
+    id:number;
+    applicantName:string;
+    applicantMail:string;
+    patientName:string;
+    address:string;
+    city:string;
+    district:string;
+    state:string;
+    mobile:string;
+    status:boolean;
+    imageId:number;
+    waitingWith:string;
+    approvedBy:string;
+    emergency:string;
+    deliveryinitiated:boolean;
+    appliedOn:Date;
+    approvedOn:Date;
+    lastUpdate:Date;
+}

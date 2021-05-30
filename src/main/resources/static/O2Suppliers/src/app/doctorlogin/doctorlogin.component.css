@@ -1,0 +1,17 @@
+.loginrow{
+    display: flex;
+    
+}
+.logincol1{
+    display: inline-block;
+    width: 40%;
+}
+.logincol2{
+    display: inline-block;
+    width: 30%;
+    
+}
+.logincol3{
+    display: inline-block;
+    width: 40%;
+}

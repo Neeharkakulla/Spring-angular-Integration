@@ -1,0 +1,105 @@
+.welcome{
+    text-align: center;
+   
+
+}
+.nav-menu {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .nav-menu a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .success-link:hover,.danger-link:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .success-link {
+    background-color: #04AA6D;
+    
+    color: white;
+  }
+
+  .danger-link {
+    background-color: #aa0404;
+    color: white;
+  }
+.dashboard{
+    display:flex;
+    
+}
+
+.checkStatus{
+    text-align: center;
+}
+.checkStatus table{
+    
+    margin-left: 5vw;
+    border: 2px solid;
+    text-align: justify;
+  
+}
+.checkStatus td, .checkstatus th{
+    border: 2px solid;
+    width: 20px;
+}
+
+.mydetails{
+    background-color: white;
+    
+    text-align: center;
+}
+.mydetails table{
+    margin-left: 30vw;
+}
+.mydetails td{
+    border: 2px solid;
+    width: 20vw;
+    height:10vh;
+}
+/* 
+.menu-col4{
+    display: inline-block;
+    width: 30%;
+   text-align: center;
+    right: 0;
+   height: 100vh;
+ 
+}
+
+.menu-col4 th{
+    border:1px solid;
+    border-color:rgba(128, 128, 128, 0.555);
+    background-color: #39c4da2a;
+   
+    height:80px;
+   
+}
+.menu-col4 td{
+    border:1px solid;
+    border-color:rgba(128, 128, 128, 0.555);
+    background-color: #17a2b8;
+    width:400px;
+    height:80px;
+   
+}
+
+.menu-col4 td:hover{
+    background-color: #17a3b8b4;
+}
+#logout{
+    background-color: #dc3545;
+
+}
+#logout:hover{
+
+    background-color: #dc3546c0 ;
+} */

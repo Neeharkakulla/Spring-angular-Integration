@@ -1,0 +1,133 @@
+<div class="loginrow">
+    <div class="logincol1">
+
+    </div>
+    <div class="logincol2">
+     <div class="modal-header">
+        <div class="modal-dialog">
+            
+        <div  *ngIf="tLoginRegister == false"  class="modal-content"   tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height: auto;">               <div class="modal-content">
+               
+                <div class="modal-header">
+                 
+                  <h4 class="modal-title" id="myModalLabel">Login</h4>
+                 
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                          
+                          <span style="color: red;"id="login"></span>
+                            <label>Email</label>
+                            <input type="text" formControlName="email" class="form-control" autofocus="true" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                
+                            </div>
+                            <span *ngIf="!validate" style="color: red;">Invalid Email</span>
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                                
+                              </div>
+                              <span *ngIf="!validate" style="color: red;">Invalid Password</span>
+                          </div>
+                          
+                      <div class="form-group form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                        </label>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button> &nbsp;
+                      <button *ngIf="!admin" (click) = "toggleLoginRegister()" class="btn btn-primary">Register</button>&nbsp;
+                      <button type="button" class="btn btn-danger"  (click) = "hide()">Close</button>
+                    
+                    </form>
+                   
+                </div>
+              </div>
+            </div>
+           </div>
+                <div *ngIf="tLoginRegister == true "  class="modal-content"   tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height: auto;">
+                    
+                    <div class="modal-dialog">
+                    
+                      <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel">Register</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        
+        
+                          <div class="form-group">
+                            <label>FirstName</label>
+                            <input type="text" formControlName="firstName" class="form-control" autofocus="true" [ngClass]="{ 'is-invalid': submitted && r.firstName.errors }" />
+                            <div *ngIf="submitted && r.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="r.firstName.errors.required">firstName is required</div>
+                                <div *ngIf="r.firstName.errors.minlength">firstName must be at least 6 characters</div>
+                            </div>
+                          </div>
+        
+        
+                          <div class="form-group">
+                            <label>LastName</label>
+                            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.lastName.errors }" />
+                            <div *ngIf="submitted && r.lastName.errors" class="invalid-feedback">
+                                <div *ngIf="r.lastName.errors.required">lastName is required</div>
+                                <div *ngIf="r.lastName.errors.minlength">lastName must be at least 6 characters</div>
+                            </div>
+                          </div>
+        
+        
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.email.errors }" />
+                                <div *ngIf="submitted && r.email.errors" class="invalid-feedback">
+                                    <div *ngIf="r.email.errors.required">Email is required</div>
+                                    <div *ngIf="r.email.errors.email">Email must be a valid email address</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.password.errors }" />
+                                <div *ngIf="submitted && r.password.errors" class="invalid-feedback">
+                                    <div *ngIf="r.password.errors.required">Password is required</div>
+                                    <div *ngIf="r.password.errors.minlength">Password must be at least 6 characters</div>
+                                </div>
+                              </div>
+        
+                              <div class="form-group">
+                                <label>PhoneNumber</label>
+                                <input type="tel" formControlName="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.number.errors }" />
+                                <div *ngIf="submitted && r.number.errors" class="invalid-feedback">
+                                    <div *ngIf="r.number.errors.required">phoneNumber is required</div>
+                                    <div *ngIf="r.number.errors.minlength">phoneNumber must contain 10 characters</div>
+                                </div>
+                              </div>
+                          
+                          <button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+                          <button (click) = "toggleLoginRegister()" class="btn btn-primary">Login</button> &nbsp;
+                          <button type="button" class="btn btn-danger"  (click) = "hide()">Close</button>
+                        </form>
+                        
+                  </div>
+                </div>
+                
+              </div>
+                   
+      </div>
+     
+    </div>
+    </div>
+    <div class="logincol3">
+        
+    </div>
+</div>
