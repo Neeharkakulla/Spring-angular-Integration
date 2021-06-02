@@ -6,7 +6,9 @@
     forward order.
 
  -->
- 
+ <div id="imageOverlay">
+     <app-image-viewer></app-image-viewer>
+ </div>
 <div class="nav-menu">
     <a class="success-link" (click)="waitingApplications()">Applications</a>
     <a class="success-link" (click)="myAccount()">My Details</a>
@@ -28,13 +30,12 @@
                 <th>Patient</th>
                 <th>Address</th>
                 <th>Contact</th>
-                <th>Status</th>
+               
                 <th>Progress</th>
                 <th>Emergency</th>
                 <th>Applied on</th>
                 <th>Approved on</th>
                 <th>LastUpdate</th>
-                <th>Delivery Initiated</th>
                 <th>Document</th>
                 <th>Modify</th>
             </tr>
@@ -45,7 +46,7 @@
                 <td *ngIf="a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
                 
                 <td *ngIf="a.status">{{a.mobile}}</td>
-                <td *ngIf="a.status">{{a.status}}</td>
+                
                 <td *ngIf="a.status">{{a.waitingWith}}</td>
                 <td *ngIf="a.status"><select [(ngModel)]="a.emergency">
                     <option>Major</option>
@@ -53,9 +54,11 @@
                     <option>Minor</option>
                 </select></td>
                 <td *ngIf="a.status">{{a.appliedOn}}</td>
-                <td *ngIf="a.status">{{a.approvedOn}}</td>
+                <td *ngIf="a.status">
+                    <span *ngIf="a.approvedOn==null||a.approvedOn==undefined">NA</span>
+                    {{a.approvedOn}}
+                </td>
                 <td *ngIf="a.status">{{a.lastUpdate}}</td>
-                <td *ngIf="a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
                 <td *ngIf="a.status" (click)="getImage(a.imageId)"><u>document</u></td>
                 <td *ngIf="a.status"><button (click)="approve(a)" class="btn btn-success">Approve</button></td>
             </tr>

@@ -72,8 +72,8 @@ export class SupplierloginComponent implements OnInit {
      this.loginForm = this.formBuilder.group({
        
       
-       email: ['supplier@supplier.com', [Validators.required, Validators.email]],
-       password: ['supplier', [Validators.required, Validators.minLength(4)]],
+       email: ['', [Validators.required, Validators.email]],
+       password: ['', [Validators.required, Validators.minLength(4)]],
        role:['supplier'],
        
      });

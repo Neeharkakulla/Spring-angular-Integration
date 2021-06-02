@@ -35,6 +35,7 @@ public class HibernateConfig {
 	
 	@Bean
 	LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	
 		LocalContainerEntityManagerFactoryBean lfb = new LocalContainerEntityManagerFactoryBean();
 		lfb.setDataSource(dataSource());
 		

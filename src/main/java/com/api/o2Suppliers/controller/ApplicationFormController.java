@@ -3,7 +3,6 @@ package com.api.o2Suppliers.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.o2Suppliers.model.ApplicationForm;
 import com.api.o2Suppliers.service.ApplicationFormService;
 
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/api/application")
 public class ApplicationFormController {

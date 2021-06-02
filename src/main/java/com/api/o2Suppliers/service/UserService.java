@@ -20,6 +20,22 @@ public class UserService {
 	DoctorRepository doctorrepo;
 	@Autowired
 	SupplierRepository supplierrepo;
+	
+//admin services	
+	public UserDetails validateAdmin(UserDetails admin) {
+		UserDetails dbuser=userrepo.findByEmail(admin.getEmail());
+		if(dbuser!=null
+				&&dbuser.getPassword().equals(admin.getPassword())
+				&&dbuser.getRole().equalsIgnoreCase("admin")&&dbuser.isStatus()) 
+		{
+			dbuser.setPassword("");
+			return dbuser;
+		}
+		return null;
+	}
+	
+	
+//user services	
 	public UserDetails registerUser(UserDetails user) {
 		user.setStatus(true);
 		return userrepo.save(user);
@@ -36,41 +52,7 @@ public class UserService {
 		}
 		return null;
 	}
-	public UserDetails validateAdmin(UserDetails admin) {
-		UserDetails dbuser=userrepo.findByEmail(admin.getEmail());
-		if(dbuser!=null
-				&&dbuser.getPassword().equals(admin.getPassword())
-				&&dbuser.getRole().equalsIgnoreCase("admin")&&dbuser.isStatus()) 
-		{
-			dbuser.setPassword("");
-			return dbuser;
-		}
-		return null;
-	}
-	public DoctorModel validateDoctor(UserDetails doctor) {
-		DoctorModel dbuser=doctorrepo.findByEmail(doctor.getEmail());
-		
-		if(dbuser!=null
-				&&dbuser.getPassword().equals(doctor.getPassword())
-				&&dbuser.getRole().equalsIgnoreCase("doctor")&&dbuser.isStatus()) 
-		{
-			dbuser.setPassword("");
-			return dbuser;
-		}
-		return null;
-	}
 	
-	public SupplierModel validateSupplier(UserDetails supplier) {
-		SupplierModel dbuser=supplierrepo.findByEmail(supplier.getEmail());
-		if(dbuser!=null
-				&&dbuser.getPassword().equals(supplier.getPassword())
-				&&dbuser.getRole().equalsIgnoreCase("supplier")&&dbuser.isStatus()) 
-		{
-			dbuser.setPassword("");
-			return dbuser;
-		}
-		return null;
-	}
 	public UserDetails getUserWithId(int id) {
 		UserDetails user=userrepo.findById(id);
 		return user;
@@ -90,25 +72,44 @@ public class UserService {
 		userrepo.save(user);
 		
 	}
-	public DoctorModel saveDoctor(DoctorModel doctor) {
-		doctor.setStatus(true);
-			return doctorrepo.save(doctor) ;
-	}
-	
-	public SupplierModel saveSupplier(SupplierModel supplier) {
-		supplier.setStatus(true);
-		return supplierrepo.save(supplier);
-	}
-	public List<DoctorModel> getAllDoctors() {
+	public void blockUser(UserDetails user) {
+		user.setStatus(false);
+		userrepo.save(user);
 		
-		return doctorrepo.findAll();
+	}
+	public void unblockUser(UserDetails user) {
+		user.setStatus(true);
+		userrepo.save(user);
+		
 	}
     public List<UserDetails> getAllUsers() {
 		
 		return userrepo.findAll();
 	}
-	public List<SupplierModel> getAllSuppliers() {
-			return supplierrepo.findAll();
+
+	
+//doctor services	
+	public DoctorModel validateDoctor(UserDetails doctor) {
+		DoctorModel dbuser=doctorrepo.findByEmail(doctor.getEmail());
+		
+		if(dbuser!=null
+				&&dbuser.getPassword().equals(doctor.getPassword())
+				&&dbuser.getRole().equalsIgnoreCase("doctor")&&dbuser.isStatus()) 
+		{
+			dbuser.setPassword("");
+			return dbuser;
+		}
+		return null;
+	}
+	public DoctorModel saveDoctor(DoctorModel doctor) {
+		doctor.setStatus(true);
+			return doctorrepo.save(doctor) ;
+	}
+	
+
+	public List<DoctorModel> getAllDoctors() {
+		
+		return doctorrepo.findAll();
 	}
 	public boolean validatePasswordDoctor(String email, String password) {
 	DoctorModel dbuser=doctorrepo.findByEmail(email);
@@ -124,6 +125,37 @@ public class UserService {
 		
 		doctorrepo.save(doctor);
 	}
+	public void blockDoctor(DoctorModel doctor) {
+		doctor.setStatus(false);
+		doctorrepo.save(doctor);
+		
+	}
+	public void unblockDoctor(DoctorModel doctor) {
+		doctor.setStatus(true);
+		doctorrepo.save(doctor);
+				
+	}
+	
+//supplier services
+	public SupplierModel validateSupplier(UserDetails supplier) {
+		SupplierModel dbuser=supplierrepo.findByEmail(supplier.getEmail());
+		if(dbuser!=null
+				&&dbuser.getPassword().equals(supplier.getPassword())
+				&&dbuser.getRole().equalsIgnoreCase("supplier")&&dbuser.isStatus()) 
+		{
+			dbuser.setPassword("");
+			return dbuser;
+		}
+		return null;
+	}
+	public SupplierModel saveSupplier(SupplierModel supplier) {
+		supplier.setStatus(true);
+		return supplierrepo.save(supplier);
+	}
+
+	public List<SupplierModel> getAllSuppliers() {
+			return supplierrepo.findAll();
+	}
 	public boolean validatePasswordSupplier(String email, String password) {
 		SupplierModel dbuser=supplierrepo.findByEmail(email);
 		
@@ -137,26 +169,8 @@ public class UserService {
 	public void updateSupplier(SupplierModel supplier) {
 		supplierrepo.save(supplier);
 	}
-	public void blockUser(UserDetails user) {
-		user.setStatus(false);
-		userrepo.save(user);
-		
-	}
-	public void unblockUser(UserDetails user) {
-		user.setStatus(true);
-		userrepo.save(user);
-		
-	}
-	public void blockDoctor(DoctorModel doctor) {
-		doctor.setStatus(false);
-		doctorrepo.save(doctor);
-		
-	}
-	public void unblockDoctor(DoctorModel doctor) {
-		doctor.setStatus(true);
-		doctorrepo.save(doctor);
-				
-	}
+	
+	
 	public void blockSupplier(SupplierModel supplier) {
 		supplier.setStatus(false);
 		supplierrepo.save(supplier);

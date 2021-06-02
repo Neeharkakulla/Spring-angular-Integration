@@ -8,7 +8,6 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,7 @@ import com.api.o2Suppliers.dao.ImageRepository;
 import com.api.o2Suppliers.model.ImageModel;
 
 @RestController
-@CrossOrigin(origins = "*")
+
 @RequestMapping(path = "api/users/image")
 public class ImageUploadController {
 
@@ -31,7 +30,7 @@ public class ImageUploadController {
 	@PostMapping("/upload")
 	public ImageModel uplaodImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
 
-		System.out.println("Original Image Byte Size - " + file.getBytes().length);
+		
 		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
 				compressBytes(file.getBytes()));
 		
@@ -44,7 +43,7 @@ public class ImageUploadController {
 		final Optional<ImageModel> retrievedImage = imageRepository.findById((long)id);
 		ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
 				decompressBytes(retrievedImage.get().getPicByte()));
-		System.out.println(img.getName());
+		
 		return img;
 	}
 
@@ -64,7 +63,7 @@ public class ImageUploadController {
 			outputStream.close();
 		} catch (IOException e) {
 		}
-		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+		
 
 		return outputStream.toByteArray();
 	}

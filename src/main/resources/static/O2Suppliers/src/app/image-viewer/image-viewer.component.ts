@@ -18,5 +18,8 @@ export class ImageViewerComponent implements OnInit {
    if(this.image==undefined)
     this.router.navigate([''])
   }
+  close(){
+    document.getElementById("imageOverlay").style.display="none"
+  }
 
 }

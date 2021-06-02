@@ -126,6 +126,22 @@ export class AdminDashBoardComponent implements OnInit {
      this.passwordValid=false;
    });
  }
+
+  //Gets called when the user clicks on retieve image button to get the image from back end
+  getImage(id:any) {
+    //Make a call to Sprinf Boot to get the Image Bytes.
+    
+      this.imageService.getImage(id).subscribe(
+        res => {
+          this.retrieveResonse = res;
+          this.base64Data = this.retrieveResonse.picByte;
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+          document.getElementById("imageOverlay").style.display="block"
+          document.getElementById("image").setAttribute("src",this.retrievedImage)
+        }
+      );
+  }
+
  cancel(form:ApplicationForm){
    form.status=false;
     this.formService.cancel(form).subscribe();

@@ -3,7 +3,6 @@ package com.api.o2Suppliers.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,7 @@ import com.api.o2Suppliers.model.UserDetails;
 import com.api.o2Suppliers.service.UserService;
 
 @RestController
-@CrossOrigin("*")
+
 @RequestMapping("/api/users")
 public class UserController {
 	
@@ -25,6 +24,17 @@ public class UserController {
 	UserService userService;
 
 
+//admin mapping
+
+	@PostMapping("/admin/login")
+	public UserDetails loginAdmin(@RequestBody UserDetails admin) {
+		
+		
+		return userService.validateAdmin(admin);
+	}
+	
+//users mapping
+	
 	@PostMapping("/user/register")
 	public boolean registerUser(@RequestBody UserDetails user) {
 		
@@ -40,24 +50,7 @@ public class UserController {
 	
 		return userService.validateUser(user);
 	}
-	@PostMapping("/doctor/login")
-	public DoctorModel loginDoctor(@RequestBody UserDetails doctor) {
-		
-		return userService.validateDoctor(doctor);
-	}
-	@PostMapping("/supplier/login")
-	public SupplierModel loginSupplier(@RequestBody UserDetails supplier) {
-		
-		return userService.validateSupplier(supplier);
-	}
-	@PostMapping("/admin/login")
-	public UserDetails loginAdmin(@RequestBody UserDetails admin) {
-		
-		
-		return userService.validateAdmin(admin);
-	}
-	
-	@PostMapping("/validate/{email}")
+		@PostMapping("/validate/{email}")
 	public boolean validatePasswordUser(@PathVariable("email")String email,@RequestBody String password) {
 		
 		return userService.validatePasswordUser(email,password);
@@ -67,50 +60,10 @@ public class UserController {
 	public void changePasswordUser(@RequestBody UserDetails user) {
 		userService.updateUser(user);
 	}
-	@PostMapping("/doctor/register")
-	public DoctorModel registerDoctor(@RequestBody DoctorModel doctor) {
-		
-		return userService.saveDoctor(doctor);
-	}
-	@PostMapping("/supplier/register")
-	public SupplierModel registerSupplier(@RequestBody SupplierModel supplier) {
-		return userService.saveSupplier(supplier);
-	}
-	
-	@GetMapping("/supplier/getAll")
-	public List<SupplierModel> getAllSuppliers(){
-		return userService.getAllSuppliers();
-	}
-	
-	@GetMapping("/doctor/getAll")
-	public List<DoctorModel> getAllDoctors(){
-		return userService.getAllDoctors();
-	}
 	
 	@GetMapping("/getAll")
 	public List<UserDetails> getAllUsers(){
 		return userService.getAllUsers();
-	}
-	
-	@PostMapping("/doctor/validate/{email}")
-	public boolean validatePasswordDoctor(@PathVariable("email")String email,@RequestBody String password) {
-		
-		return userService.validatePasswordDoctor(email,password);
-	}
-	
-	@PostMapping("/doctor/newpassword")
-	public void changePasswordDoctor(@RequestBody DoctorModel doctor) {
-		userService.updateDoctor(doctor);
-	}
-	@PostMapping("/supplier/validate/{email}")
-	public boolean validatePasswordSupplier(@PathVariable("email")String email,@RequestBody String password) {
-		
-		return userService.validatePasswordSupplier(email,password);
-	}
-	
-	@PostMapping("/supplier/newpassword")
-	public void changePasswordSupplier(@RequestBody SupplierModel supplier) {
-		userService.updateSupplier(supplier);
 	}
 	
 	@PostMapping("/user/block")
@@ -123,7 +76,32 @@ public class UserController {
 		userService.unblockUser(user);
 		return userService.getAllUsers();
 	}
+
+//doctor mapping
 	
+	@PostMapping("/doctor/register")
+	public DoctorModel registerDoctor(@RequestBody DoctorModel doctor) {
+		
+		return userService.saveDoctor(doctor);
+	}
+	
+
+	@GetMapping("/doctor/getAll")
+	public List<DoctorModel> getAllDoctors(){
+		return userService.getAllDoctors();
+	}
+	
+		
+	@PostMapping("/doctor/validate/{email}")
+	public boolean validatePasswordDoctor(@PathVariable("email")String email,@RequestBody String password) {
+		
+		return userService.validatePasswordDoctor(email,password);
+	}
+	
+	@PostMapping("/doctor/newpassword")
+	public void changePasswordDoctor(@RequestBody DoctorModel doctor) {
+		userService.updateDoctor(doctor);
+	}
 	@PostMapping("/doctor/block")
 	public List<DoctorModel> blockDoctor(@RequestBody DoctorModel doctor){
 		userService.blockDoctor(doctor);
@@ -134,6 +112,37 @@ public class UserController {
 		userService.unblockDoctor(doctor);
 		return userService.getAllDoctors();
 	}
+	
+	@PostMapping("/doctor/login")
+	public DoctorModel loginDoctor(@RequestBody UserDetails doctor) {
+		
+		return userService.validateDoctor(doctor);
+	}
+	
+//supplier mapping
+	
+	@PostMapping("/supplier/register")
+	public SupplierModel registerSupplier(@RequestBody SupplierModel supplier) {
+		return userService.saveSupplier(supplier);
+	}
+	
+	@GetMapping("/supplier/getAll")
+	public List<SupplierModel> getAllSuppliers(){
+		return userService.getAllSuppliers();
+	}
+	
+	
+	@PostMapping("/supplier/validate/{email}")
+	public boolean validatePasswordSupplier(@PathVariable("email")String email,@RequestBody String password) {
+		
+		return userService.validatePasswordSupplier(email,password);
+	}
+	
+	@PostMapping("/supplier/newpassword")
+	public void changePasswordSupplier(@RequestBody SupplierModel supplier) {
+		userService.updateSupplier(supplier);
+	}
+	
 	@PostMapping("/supplier/block")
 	public List<SupplierModel> blockSupplier(@RequestBody SupplierModel supplier){
 		userService.blockSupplier(supplier);
@@ -145,5 +154,12 @@ public class UserController {
 		return userService.getAllSuppliers();
 	}
 	
+	@PostMapping("/supplier/login")
+	public SupplierModel loginSupplier(@RequestBody UserDetails supplier) {
+		
+		return userService.validateSupplier(supplier);
+	}
+	
+
 	
 }

@@ -68,12 +68,12 @@ export class DoctorloginComponent implements OnInit {
        city:['',Validators.required]
 
      });
- 
+
      this.loginForm = this.formBuilder.group({
        
       
-       email: ['doctor@doctor.com', [Validators.required, Validators.email]],
-       password: ['doctor', [Validators.required, Validators.minLength(4)]],
+       email: ['', [Validators.required, Validators.email]],
+       password: ['', [Validators.required, Validators.minLength(4)]],
        role:['doctor'],
        
      });

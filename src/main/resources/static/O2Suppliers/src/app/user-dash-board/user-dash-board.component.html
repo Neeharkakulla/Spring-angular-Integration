@@ -1,4 +1,7 @@
 
+<div id="imageOverlay">
+    <app-image-viewer></app-image-viewer>
+</div>
 <div class="nav-menu">
     <a class="success-link" (click)="showForm()">Apply</a>
     <a class="success-link" (click)="myApplications()"> My Applications</a>
@@ -121,10 +124,10 @@
                 <td *ngIf="a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
                 
                 <td *ngIf="a.status">{{a.mobile}}</td>
-                <td *ngIf="a.status">{{a.status}}</td>
+                <td *ngIf="a.status">Active</td>
                 <td *ngIf="a.status">{{a.waitingWith}}</td>
                 <td *ngIf="a.status">{{a.appliedOn}}</td>
-                <td *ngIf="a.status">{{a.approvedOn}}</td>
+                <td *ngIf="a.status"><span *ngIf="a.approvedOn==null||a.approvedOn==undefined">NA</span>{{a.approvedOn}}</td>
                 <td *ngIf="a.status">{{a.lastUpdate}}</td>
                 <td *ngIf="a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
                 <td *ngIf="a.status" (click)="getImage(a.imageId)"><u>document</u></td>
@@ -145,23 +148,22 @@
                 <th>Progress</th>
                 <th>Applied on</th>
                 <th>Approved on</th>
- 
                 <th>LastUpdate</th>
                 <th>Delivery Initiated</th>
                 <th>Document</th>
                 <th>Modify</th>
-            </tr>
-            <tr *ngFor="let a of applications">
+            </tr> 
+            <tr *ngFor="let a of applications">  
                 <td *ngIf="!a.status">{{a.applicantName}}</td>
                 <td *ngIf="!a.status">{{a.applicantMail}}</td>
                 <td *ngIf="!a.status">{{a.patientName}}</td>
                 <td *ngIf="!a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
                 
                 <td *ngIf="!a.status">{{a.mobile}}</td>
-                <td *ngIf="!a.status">{{a.status}}</td>
+                <td *ngIf="!a.status">In Active</td>
                 <td *ngIf="!a.status">{{a.waitingWith}}</td>
                 <td *ngIf="!a.status">{{a.appliedOn}}</td>
-                <td *ngIf="!a.status">{{a.approvedOn}}</td>
+                <td *ngIf="!a.status"><span *ngIf="a.approvedOn==null||a.approvedOn==undefined">NA</span>{{a.approvedOn}}</td>
                 <td *ngIf="!a.status">{{a.lastUpdate}}</td>
                 <td *ngIf="!a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
                 <td *ngIf="!a.status" (click)="getImage(a.imageId)"><u>document</u></td>

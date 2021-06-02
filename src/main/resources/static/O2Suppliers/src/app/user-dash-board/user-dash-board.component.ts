@@ -110,8 +110,8 @@ apply(){
           this.retrieveResonse = res;
           this.base64Data = this.retrieveResonse.picByte;
           this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-           window.sessionStorage.setItem("image",this.retrievedImage);
-           window.open("http://localhost:4200/view-document","_blank");
+          document.getElementById("imageOverlay").style.display="block"
+          document.getElementById("image").setAttribute("src",this.retrievedImage)
         }
       );
   }

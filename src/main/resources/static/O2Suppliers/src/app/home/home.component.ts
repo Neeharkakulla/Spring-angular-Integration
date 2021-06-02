@@ -30,22 +30,22 @@ export class HomeComponent implements OnInit {
   handleScroll(event: KeyboardEvent) {
     let scroll=window.pageYOffset;
     console.log(scroll)
-    if(scroll>=160)
+    if(scroll>=700)
     {
-      document.getElementById("aboutimage").style.animation='2s fadeInFromRight 1'
-      document.getElementById("aboutheading").style.animation='2s fadeInFromLeft 1'
-      document.getElementById("aboutpara").style.animation='2s fadeInFromLeft 1'
+      document.getElementById("aboutimage").style.animation='2.5s fadeInFromRight 1'
+      document.getElementById("aboutheading").style.animation='2.5s fadeInFromLeft 1'
+      document.getElementById("aboutpara").style.animation='2.5s fadeInFromLeft 1'
     }
-    if(scroll>=580)
+    if(scroll>=1050)
     {
-      document.getElementById("visionimage").style.animation='2s fadeInFromLeft 1'
-      document.getElementById("visionheading").style.animation='2s fadeInFromRight 1'
-      document.getElementById("visionpara").style.animation='2s fadeInFromRight 1'
+      document.getElementById("visionimage").style.animation='2.5s fadeInFromLeft 1'
+      document.getElementById("visionheading").style.animation='2.5s fadeInFromRight 1'
+      document.getElementById("visionpara").style.animation='2.5s fadeInFromRight 1'
     }
-    if(scroll>=900){
-      document.getElementById("missionimage").style.animation='2s fadeInFromRight 1'
-      document.getElementById("missionheading").style.animation='2s fadeInFromLeft 1'
-      document.getElementById("missionpara").style.animation='2s fadeInFromLeft 1'
+    if(scroll>=1450){
+      document.getElementById("missionimage").style.animation='2.5s fadeInFromRight 1'
+      document.getElementById("missionheading").style.animation='2.5s fadeInFromLeft 1'
+      document.getElementById("missionpara").style.animation='2.5s fadeInFromLeft 1'
     }
   }
   login(role:String){

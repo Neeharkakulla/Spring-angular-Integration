@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { from } from 'rxjs';
 import { ApplicationForm } from 'src/model/application-form';
 import { DoctorDetails } from 'src/model/doctor-details';
 import { ApplicationFromService } from 'src/services/application-from.service';
@@ -99,13 +100,18 @@ export class DoctorDashBoardComponent implements OnInit {
             this.retrieveResonse = res;
             this.base64Data = this.retrieveResonse.picByte;
             this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-             window.sessionStorage.setItem("image",this.retrievedImage);
-             window.open("http://localhost:4200/view-document","_blank");
+          
+            document.getElementById("imageOverlay").style.display="block"
+            document.getElementById("image").setAttribute("src",this.retrievedImage)
           }
         );
     }
     approve(form:ApplicationForm){
       form.approvedBy=this.doctor.firstName+" "+this.doctor.lastName
+      if(form.emergency==null&&form.emergency==undefined){
+        alert("Please Specify Emergency!")
+        return
+      }
       this.formService.approve(form).subscribe(data=>{
         this.applications=data;
       })

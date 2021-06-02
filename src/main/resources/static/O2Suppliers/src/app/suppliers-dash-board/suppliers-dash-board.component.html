@@ -4,7 +4,9 @@
     accpect/cancel order.
     forward status to patient for delivery.
  -->
-
+ <div id="imageOverlay">
+    <app-image-viewer></app-image-viewer>
+</div>
  
  <div class="nav-menu">
     <a class="success-link" (click)="waitingApplications()">Applications</a>
@@ -48,10 +50,10 @@
                <td *ngIf="a.status">{{a.mobile}}</td>
                
                <td *ngIf="a.status">{{a.waitingWith}}</td>
-               <td *ngIf="a.status">{{a.emergency}}</td>
-               <td *ngIf="a.status">{{a.approvedBy}}</td>
+               <td *ngIf="a.status"><span *ngIf="a.emergency==null||a.emergency==undefined">NA</span>{{a.emergency}}</td>
+               <td *ngIf="a.status"><span *ngIf="a.approvedBy==null||a.approvedBy==undefined">NA</span>{{a.approvedBy}}</td>
                <td *ngIf="a.status">{{a.appliedOn}}</td>
-               <td *ngIf="a.status">{{a.approvedOn}}</td>
+               <td *ngIf="a.status"><span *ngIf="a.approvedOn==null||a.approvedOn==undefined">NA</span>{{a.approvedOn}}</td>
                <td *ngIf="a.status">{{a.lastUpdate}}</td>
                <td *ngIf="a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
                

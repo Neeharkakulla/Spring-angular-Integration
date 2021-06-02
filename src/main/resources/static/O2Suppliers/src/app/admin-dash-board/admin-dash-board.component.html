@@ -12,7 +12,9 @@ can edit and cancel.
 Admin can add,edit and block  any user
 
 can change status of order -->
-
+<div id="imageOverlay">
+    <app-image-viewer></app-image-viewer>
+</div>
 <div class="nav-menu">
     <a class="success-link" (click)="allApplications()">List Applications</a>
     <a class="success-link" (click)="allUsers()">List Users</a>
@@ -60,13 +62,13 @@ can change status of order -->
                <td *ngIf="a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
                
                <td *ngIf="a.status">{{a.mobile}}</td>
-               <td *ngIf="a.status">{{a.status}}</td>
+               <td *ngIf="a.status">Active</td>
                <td *ngIf="a.status">{{a.waitingWith}}</td>
 
-               <td *ngIf="a.status">{{a.emergency}}</td>
-               <td *ngIf="a.status">{{a.approvedBy}}</td>
+               <td *ngIf="a.status"><span *ngIf="a.emergency==null||a.emergency==undefined">NA</span>{{a.emergency}}</td>
+               <td *ngIf="a.status"><span *ngIf="a.approvedBy==null||a.approvedBy==undefined">NA</span>{{a.approvedBy}}</td>
                <td *ngIf="a.status">{{a.appliedOn}}</td>
-               <td *ngIf="a.status">{{a.approvedOn}}</td>
+               <td *ngIf="a.status"><span *ngIf="a.approvedOn==null||a.approvedOn==undefined">NA</span>{{a.approvedOn}}</td>
                <td *ngIf="a.status">{{a.lastUpdate}}</td>
                <td *ngIf="a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
                
@@ -104,13 +106,13 @@ can change status of order -->
                <td *ngIf="!a.status">{{a.address}},<br/>{{a.city}},<br/>{{a.district}},<br/>{{a.state}}.</td>
                
                <td *ngIf="!a.status">{{a.mobile}}</td>
-               <td *ngIf="!a.status">{{a.status}}</td>
+               <td *ngIf="!a.status">In Active</td>
                <td *ngIf="!a.status">{{a.waitingWith}}</td>
 
-               <td *ngIf="!a.status">{{a.emergency}}</td>
-               <td *ngIf="!a.status">{{a.approvedBy}}</td>
+               <td *ngIf="!a.status"><span *ngIf="a.emergency==null||a.emergency==undefined">NA</span>{{a.emergency}}</td>
+               <td *ngIf="!a.status"><span *ngIf="a.approvedBy==null||a.approvedBy==undefined">NA</span>{{a.approvedBy}}</td>
                <td *ngIf="!a.status">{{a.appliedOn}}</td>
-               <td *ngIf="!a.status">{{a.approvedOn}}</td>
+               <td *ngIf="!a.status"><span *ngIf="a.approvedOn==null||a.approvedOn==undefined">NA</span>{{a.approvedOn}}</td>
                <td *ngIf="!a.status">{{a.lastUpdate}}</td>
                <td *ngIf="!a.status"><b *ngIf="a.deliveryinitiated">Yes</b><b *ngIf="!a.deliveryinitiated">No</b></td>
 
@@ -259,7 +261,7 @@ can change status of order -->
             <td *ngIf="d.status">{{d.lastName}}</td>
             <td *ngIf="d.status">{{d.email}}</td>
             <td *ngIf="d.status">{{d.number}}</td>
-            <td *ngIf="d.status">{{d.industryName}}</td>
+            <td *ngIf="d.status">{{d.hospitalName}}</td>
             <td *ngIf="d.status">{{d.city}}</td>
             <td *ngIf="d.status">Active</td>
             <td *ngIf="d.status"><button class="btn btn-danger" (click)="blockDoctor(d)">Block</button></td>
@@ -285,7 +287,7 @@ can change status of order -->
             <td *ngIf="!d.status">{{d.lastName}}</td>
             <td *ngIf="!d.status">{{d.email}}</td>
             <td *ngIf="!d.status">{{d.number}}</td>
-            <td *ngIf="!d.status">{{d.industryName}}</td>
+            <td *ngIf="!d.status">{{d.hospitalName}}</td>
             <td *ngIf="!d.status">{{d.city}}</td>
             <td *ngIf="!d.status">In Active</td>
             <td *ngIf="!d.status"><button class="btn btn-success" (click)="unBlockDoctor(d)">Un Block</button></td>
